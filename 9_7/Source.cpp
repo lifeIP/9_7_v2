@@ -33,7 +33,7 @@ int main()
     schedule f[15];
     int count = 0;
     int c = 0;
-    char flower[50] = {};
+    char prepod[50] = {};
     int day;
     int month;
     while (true)
@@ -60,29 +60,17 @@ int main()
         case '4':
             cout << "Enter date: ";
             cin >> day;
-            for (; day > 30;) {
+            for (; day > 31;) {
                 cin >> day;
             }
-            cin >> month;
-            for (; month > 12;) {
-                cin >> month;
-            }
-            cout << find_normal_ingredient(f, day, month, count, 1);
+            get_all_lessons(f, day, count);
             break;
         case '5':
-            cout << "Enter date: ";
-            cin >> day;
-            for (; day > 30;) {
-                cin >> day;
-            }
-            cin >> month;
-            for (; month > 12;) {
-                cin >> month;
-            }
-            cout << find_normal_ingredient(f, day, month, count, 0);
+            cin >> prepod;
+            cout << get_all_hours(f, prepod, count);
             break;
         case '6':
-            enough(f, count);
+            cout << get_all_lections(f, count);
             break;
         case '0':
             return 0;
@@ -256,25 +244,18 @@ void get_all_lessons(schedule* f, int date, int count) {
 int get_all_lections(schedule* f, int count) {
     int c = 0;
     for (int i = 0; i < count; i++) {
-        if (f[i].s_type_of_occupation == "lection") {
+        if (f[i].s_type_of_occupation[0] == 'l'&& f[i].s_type_of_occupation[1] == 'e'&& f[i].s_type_of_occupation[2] == 'c' && f[i].s_type_of_occupation[3] == 't' && f[i].s_type_of_occupation[4] == 'i' && f[i].s_type_of_occupation[5] == 'o' && f[i].s_type_of_occupation[6] == 'n') {
             c++;
         }
     }
     return c;
 }
 int get_all_hours(schedule* f, char* prepod, int count) {
-    int h = 0;
-    bool j = true;
-    int week;
+    int al = 0;
     for (int i = 0; i < count; i++) {
-        if (f[i].s_familiya == prepod) {
-            if (abs(week - f[i].s_date) > 7) break;
-            h += 1;
-            if (j == true) {
-                week = f[i].s_date;
-                j = false;
-            }
+        if (f[i].s_familiya[0] == prepod[0] && f[i].s_familiya[1] == prepod[1] && f[i].s_familiya[2] == prepod[2] && f[i].s_familiya[3] == prepod[3]) {
+            al++;
         }
     }
-    return h;
+    return al;
 }
