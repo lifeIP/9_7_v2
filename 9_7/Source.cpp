@@ -22,7 +22,7 @@ void print_menu();
 int load(const char* file, schedule* a);
 void setData(const char* fileName, int size);
 void get_all_lessons(schedule* f, int date, int count);
-int get_all_hours(schedule* f, char* prepod, int count);
+float get_all_hours(schedule* f, char* prepod, int count);
 int get_all_lections(schedule* f, int count);
 
 
@@ -250,11 +250,11 @@ int get_all_lections(schedule* f, int count) {
     }
     return c;
 }
-int get_all_hours(schedule* f, char* prepod, int count) {
-    int al = 0;
+float get_all_hours(schedule* f, char* prepod, int count) {
+    float al = 0;
     for (int i = 0; i < count; i++) {
         if (f[i].s_familiya[0] == prepod[0] && f[i].s_familiya[1] == prepod[1] && f[i].s_familiya[2] == prepod[2] && f[i].s_familiya[3] == prepod[3]) {
-            al++;
+            al += f[i].s_end_time - f[i].s_begin_time;
         }
     }
     return al;
